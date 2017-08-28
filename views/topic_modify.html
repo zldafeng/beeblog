@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+{{template "head"}}
+<title>
+    修改文章-我的 beego 博客
+</title>
+<link rel="stylesheet" type="text/css" href="../static/css/dafeng.css">
+<!--bootstrap-markdown-->
+<link rel="stylesheet" type="text/css" href="../static/bootstrap-markdown/css/bootstrap-markdown.min.css">
+<link rel="stylesheet" type="text/css" href="../static/bootstrap-markdown/scss/bootstrap-markdown.scss">
+</head>
+<body style="padding-top: 70px">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</div>
+<div class="container content">
+    <h1>文章列表</h1>
+    <form method="post" action="/topic" enctype="multipart/form-data">
+        <input type="hidden" name="tid" value="{{.Tid}}">
+        <div class="form-group">
+            <label>文章标题：</label>
+            <input type="text" name="title" class="form-control" value="{{.Topic.Title}}">
+        </div>
+        <div class="form-group">
+            <label>文章分类：</label>
+            <input type="text" class="form-control" name="category" value="{{.Topic.Category}}">
+        </div>
+        <div class="form-group">
+            <label>文章标签：</label>
+            <input type="text" class="form-control" name="label" value="{{.Topic.Labels}}">
+        </div>
+        <div class="form-group">
+            <label>文章内容：</label>
+            <textarea name="content" cols="30" row="10" data-provide="markdown" class="form-control markdown-text">{{.Topic.Content}}</textarea>
+        </div>
+        <div class="form-group">
+            <label>文章附件<a href="/attachment/{{.Topic.Attachment}}">{{.Topic.Attachment}}</a>：</label>
+            <input type="file" class="form-control" name="attachment">
+        </div>
+        {{$isLogin := .IsLogin}}
+        {{if $isLogin}}
+        <button type="submit" class="btn btn-default">修改文章</button>
+        {{end}}
+    </form>
+</div>
+<script>
+    $("markdown-text").markdown()
+</script>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<!--bootstrap-markdown-->
+<script type="text/javascript" src="../static/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+<script type="text/javascript" src="../static/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
+</body>
+</html>

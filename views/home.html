@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+{{template "head"}}
+<title>
+    首页-我的 beego 博客
+</title>
+<link rel="stylesheet" type="text/css" href="../static/css/dafeng.css">
+</head>
+<body style="padding-top: 70px;">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="col-md-3 left-col">
+        <div class="card">
+            <img src="../static/img/icon.jpg" alt="." class="img-circle">
+
+            <h4 class="signature">阵阵狂风笑看黄沙走</h4>
+
+
+        </div>
+        <div class="category">
+            <h3>文章分类</h3>
+
+            <ul class="list-group" id="orderedlist">
+                {{range .Categories}}
+                <a href="/?cate={{.Title}}" style="text-decoration: #2b669a">
+                    <li class="list-group-item">
+                        {{.Title}}
+                        <span class="badge">{{.TopicCount}}</span>
+                    </li>
+                </a>
+                {{end}}
+            </ul>
+        </div>
+        <!--<div class="experience">-->
+            <!--<h4 style="font-family: 'Microsoft Himalaya';">黄酒劣马六千里</h4>-->
+
+            <!--<h6>心若无处安放，到哪都是流浪。——2017</h6>-->
+
+            <!--<h6>开心比什么都贵！——2016</h6>-->
+
+            <!--<h6>天道酬勤。——2015</h6>-->
+
+            <!--<h6>没有梦想，生命将会被琐事耗尽。——2014</h6>-->
+        <!--</div>-->
+    </div>
+    <div class="col-md-9 content">
+        {{range .Topics}}
+        <a href="/topic/view/{{.Id}}" style="text-decoration: none">
+            <div class="page-header">
+
+                <h1 style="color: #0f0f0f">{{.Title}}</h1>
+                <h6 class="text-muted">文章发表于{{.Created}}；共有{{.Views}}次浏览，{{.ReplyCount}}次评论</h6>
+                <p>
+                    {{.Content}}
+                </p>
+
+            </div>
+        </a>
+        {{end}}
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

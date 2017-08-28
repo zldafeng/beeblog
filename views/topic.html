@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+{{template "head"}}
+<title>
+    文章-我的 beego 博客
+</title>
+<link rel="stylesheet" type="text/css" href="../static/css/dafeng.css">
+</head>
+<body style="padding-top: 70px">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        {{template "navbar" .}}
+    </div>
+</div>
+<div class="container content">
+    <h1>文章列表</h1>
+    {{$isLogin := .IsLogin}}
+    {{if $isLogin}}
+    <a href="/topic/add" class="btn btn-default">发表文章</a>
+    {{end}}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>文章名称</th>
+            <th>最后更新</th>
+            <th>浏览</th>
+            <th>回复数</th>
+            <th>最后回复</th>
+            {{if $isLogin}}
+            <th>操作</th>
+            {{end}}
+        </tr>
+        </thead>
+        <tbody>
+        {{range .Topics}}
+        <tr>
+            <th>{{.Id}}</th>
+            <th><a href="/topic/view/{{.Id}}" style="text-decoration: none">{{.Title}}</a></th>
+            <!--<th>{{.Title}}</th>-->
+            <th>{{.Updated}}</th>
+            <th>{{.Views}}</th>
+            <th>{{.ReplyCount}}</th>
+            <th>{{.ReplyTime}}</th>
+            {{if $isLogin}}
+            <th><a href="/topic/modify/{{.Id}}">修改</a></th>
+            <th><a href="/topic/delete?tid={{.Id}}">删除</a></th>
+            {{end}}
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        function checkInput() {
+            var name = document.getElementById("name")
+            if (name.value.length == 0) {
+                alert("请输入分类名称")
+                return false
+            }
+            return true
+        }
+        function backToHome() {
+            window.location.href = "/"
+            return false
+        }
+    </script>
+</div>
+
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>
